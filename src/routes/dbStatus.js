@@ -1,6 +1,7 @@
 // routes/dbStatus.js
 import express from 'express';
-import pool from '/home/juan/my-app/src/db.js';
+import pool from '../db.js';  // Cambia esto
+// en lugar de: import pool from '/home/juan/my-app/src/db.js';
 
 const router = express.Router();
 
