@@ -9,7 +9,7 @@ function FormUsuario() {
     dni: '',
     fecha_de_nacimiento: '',
     contraseña: '',
-    id_rol: '' // Cambiado de idRol a id_rol para coincidir con el backend
+    id_rol: ''
   });
 
   useEffect(() => {
