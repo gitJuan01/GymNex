@@ -1,13 +1,100 @@
-main{
-    background-color: #cbcbcb;
-    width: 100%;
-    display: flex;
-    aside{
-        width: 50%;
-        background-color: #cbcbcb;
+main {
+  flex: 1; // Ocupa el espacio restante
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+  aside {
+    background-color: #9f9f9f;
+    padding: 1rem;
+    .logoLogin{
+      display: flex;
+      justify-content: center;
+    .logoImagen{
+      margin-top: 5%;
+      height: 550px;
     }
-    section{
-        width: 50%;
-        background-color: #4b4b4b;
     }
+    .fraseLogin{
+      display: flex;
+      justify-content: center;
+      margin-top: 8%;
+      color: #ffffff;
+      font-size: 60px;
+      font-weight: bold;
+      -webkit-text-stroke-color: black;
+      -webkit-text-stroke-width: 2px;
+    }
+  }
+  
+  section {
+    background-color: #4b4b4b;
+    padding: 1rem;
+    h1{
+      display: flex;
+      justify-content: center;
+        color: #ffffff;
+        font-size: 60px;
+        -webkit-text-stroke-color: black;
+        -webkit-text-stroke-width: 1px;
+    }
+    .titulo{
+      display: flex;
+      justify-content: center;
+      margin-top: 10%;
+    h3{
+      color: #B0B0B0;
+      font-size: 30px;
+    }
+  }
+    .form{
+      margin-top: 10%;
+      margin-left: 2%;
+    }
+    .inputs{
+      
+      label{
+        display: block;
+        font-size: 20px;
+        color: #B0B0B0;
+      }
+      #dni{
+        height: 50px;
+        width: 90%;
+        margin-bottom: 5%;
+        border-radius: 10px;
+      }
+      #password{
+        height: 50px;
+        width: 90%;
+        border-radius: 10px;
+        margin-bottom: 5%;
+      }
+    }
+      .recordar{
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 20px;
+        color: #B0B0B0;
+      }
+      
+      input[type="checkbox"]{
+        width: 20px;
+        accent-color: aqua; 
+      }
+
+      .botonIngresarCentrar{
+        display: flex;
+        justify-content: center;
+        margin-top: 10%;
+      }
+      .botonIngresar{
+        background-color: aqua;
+        height: 75px;
+        width: 50%;
+        border-radius: 35px;
+        font-size: 30px;
+        font-weight: bold;
+      }
+  }
 }

@@ -118,7 +118,7 @@ function FormUsuario() {
           <p>Cargando roles...</p>
         ) : (
           <select 
-            name="id_rol" // Cambiado de idRol a id_rol
+            name="id_rol"
             value={formData.id_rol}
             onChange={handleChange}
             required

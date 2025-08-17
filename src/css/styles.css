@@ -4,24 +4,93 @@
   box-sizing: border-box; }
 
 header {
-  background-color: #4b4b4b;
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 45px; }
-  header h1 {
-    color: #6f6f6f; }
-  header h3 {
-    color: #cbcbcb; }
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr; }
 
 main {
-  background-color: #cbcbcb;
-  width: 100%;
-  display: flex; }
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr; }
   main aside {
-    width: 50%;
-    background-color: #cbcbcb; }
+    background-color: #9f9f9f;
+    padding: 1rem; }
+    main aside .logoLogin {
+      display: flex;
+      justify-content: center; }
+      main aside .logoLogin .logoImagen {
+        margin-top: 5%;
+        height: 550px; }
+    main aside .fraseLogin {
+      display: flex;
+      justify-content: center;
+      margin-top: 8%;
+      color: #ffffff;
+      font-size: 60px;
+      font-weight: bold;
+      -webkit-text-stroke-color: black;
+      -webkit-text-stroke-width: 2px; }
   main section {
-    width: 50%;
-    background-color: #4b4b4b; }
+    background-color: #4b4b4b;
+    padding: 1rem; }
+    main section h1 {
+      display: flex;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 60px;
+      -webkit-text-stroke-color: black;
+      -webkit-text-stroke-width: 1px; }
+    main section .titulo {
+      display: flex;
+      justify-content: center;
+      margin-top: 10%; }
+      main section .titulo h3 {
+        color: #B0B0B0;
+        font-size: 30px; }
+    main section .form {
+      margin-top: 10%;
+      margin-left: 2%; }
+    main section .inputs label {
+      display: block;
+      font-size: 20px;
+      color: #B0B0B0; }
+    main section .inputs #dni {
+      height: 50px;
+      width: 90%;
+      margin-bottom: 5%;
+      border-radius: 10px; }
+    main section .inputs #password {
+      height: 50px;
+      width: 90%;
+      border-radius: 10px;
+      margin-bottom: 5%; }
+    main section .recordar {
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: #B0B0B0; }
+    main section input[type="checkbox"] {
+      width: 20px;
+      accent-color: aqua; }
+    main section .botonIngresarCentrar {
+      display: flex;
+      justify-content: center;
+      margin-top: 10%; }
+    main section .botonIngresar {
+      background-color: aqua;
+      height: 75px;
+      width: 50%;
+      border-radius: 35px;
+      font-size: 30px;
+      font-weight: bold; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; }
