@@ -42,7 +42,7 @@ main {
       justify-content: center;
       margin-top: 10%;
     h3{
-      color: #B0B0B0;
+      color: #ffffff;
       font-size: 30px;
     }
   }
@@ -55,7 +55,7 @@ main {
       label{
         display: block;
         font-size: 20px;
-        color: #B0B0B0;
+        color: #ffffff;
       }
       #dni{
         height: 50px;
@@ -75,7 +75,7 @@ main {
         justify-content: center;
         font-weight: bold;
         font-size: 20px;
-        color: #B0B0B0;
+        color: #ffffff;
       }
       
       input[type="checkbox"]{
@@ -83,10 +83,47 @@ main {
         accent-color: aqua; 
       }
 
+      .cambioContraseña{
+        display: flex;
+        justify-content: center;
+        a{
+          color: #ffffff;
+          font-weight: bold;
+          font-size: 20px;
+          margin-top: 5%;
+          &:hover{
+            color: #00ecd1;
+          }
+        }
+      }
+
+      .volverInicioSesion{
+        display: flex;
+        justify-content: center;
+        a{
+          color: #ffffff;
+          font-weight: bold;
+          font-size: 30px;
+          margin-top: 5%;
+          &:hover{
+            color: #00ecd1;
+          }
+        }
+      }
+
+      .credencialesInvalidas{
+        color: rgb(255, 54, 54);
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        font-size: 30px;
+        font-weight: bold;
+      }
+
       .botonIngresarCentrar{
         display: flex;
         justify-content: center;
-        margin-top: 10%;
+        margin-top: 5%;
       }
       .botonIngresar{
         background-color: aqua;

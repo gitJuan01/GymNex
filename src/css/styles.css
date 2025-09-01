@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0%;
   padding: 0%;
@@ -45,7 +46,7 @@ main {
       justify-content: center;
       margin-top: 10%; }
       main section .titulo h3 {
-        color: #B0B0B0;
+        color: #ffffff;
         font-size: 30px; }
     main section .form {
       margin-top: 10%;
@@ -53,7 +54,7 @@ main {
     main section .inputs label {
       display: block;
       font-size: 20px;
-      color: #B0B0B0; }
+      color: #ffffff; }
     main section .inputs #dni {
       height: 50px;
       width: 90%;
@@ -69,14 +70,41 @@ main {
       justify-content: center;
       font-weight: bold;
       font-size: 20px;
-      color: #B0B0B0; }
+      color: #ffffff; }
     main section input[type="checkbox"] {
       width: 20px;
       accent-color: aqua; }
+    main section .cambioContraseña {
+      display: flex;
+      justify-content: center; }
+      main section .cambioContraseña a {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 5%; }
+        main section .cambioContraseña a:hover {
+          color: #00ecd1; }
+    main section .volverInicioSesion {
+      display: flex;
+      justify-content: center; }
+      main section .volverInicioSesion a {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: 5%; }
+        main section .volverInicioSesion a:hover {
+          color: #00ecd1; }
+    main section .credencialesInvalidas {
+      color: #ff3636;
+      display: flex;
+      justify-content: center;
+      margin-top: 5%;
+      font-size: 30px;
+      font-weight: bold; }
     main section .botonIngresarCentrar {
       display: flex;
       justify-content: center;
-      margin-top: 10%; }
+      margin-top: 5%; }
     main section .botonIngresar {
       background-color: aqua;
       height: 75px;
