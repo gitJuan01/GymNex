@@ -94,8 +94,25 @@ main {
         margin-top: 5%; }
         main section .volverInicioSesion a:hover {
           color: #00ecd1; }
+    main section #nuevaPassword {
+      height: 50px;
+      width: 90%;
+      border-radius: 10px;
+      margin-bottom: 5%; }
+    main section #verificaPassword {
+      height: 50px;
+      width: 90%;
+      border-radius: 10px;
+      margin-bottom: 5%; }
     main section .credencialesInvalidas {
       color: #ff3636;
+      display: flex;
+      justify-content: center;
+      margin-top: 5%;
+      font-size: 30px;
+      font-weight: bold; }
+    main section .mensajeExito {
+      color: #3cff00;
       display: flex;
       justify-content: center;
       margin-top: 5%;

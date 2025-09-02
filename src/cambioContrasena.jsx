@@ -39,11 +39,25 @@ function CambioContrasena() {
     }
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setMessage('Contraseña cambiada exitosamente (simulación)');
+      // Llamada real al backend (URL actualizada)
+      const response = await fetch('http://localhost:3000/api/auth/cambiarPassword', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          dni: formData.dni, 
+          nuevaPassword: formData.nuevaPassword 
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error || 'Error al cambiar la contraseña');
+
+      setMessage('Contraseña cambiada exitosamente');
       setFormData({ dni: '', nuevaPassword: '', confirmarPassword: '' });
+      
     } catch (err) {
-      setError('Error al procesar la solicitud');
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -64,9 +78,9 @@ function CambioContrasena() {
         <section>
           <h1>Cambiar Contraseña</h1>
 
-            <div className='volverInicioSesion'>
-                <Link to="/">Volver a inicio de sesión</Link>
-            </div>
+          <div className='volverInicioSesion'>
+            <Link to="/">Volver a inicio de sesión</Link>
+          </div>
 
           <div className='form'>
             <form onSubmit={handleSubmit}>
@@ -77,12 +91,12 @@ function CambioContrasena() {
 
               <div className="inputs">
                 <label htmlFor="nuevaPassword">Nueva Contraseña:</label>
-                <input type="password" id="password" name="nuevaPassword" value={formData.nuevaPassword} onChange={handleChange} placeholder="Ingrese nueva contraseña" disabled={loading} required/>
+                <input type="password" id="nuevaPassword" name="nuevaPassword" value={formData.nuevaPassword} onChange={handleChange} placeholder="Ingrese nueva contraseña" disabled={loading} required/>
               </div>
 
               <div className="inputs">
                 <label htmlFor="confirmarPassword">Confirmar Contraseña:</label>
-                <input type="password" id="password" name="confirmarPassword" value={formData.confirmarPassword} onChange={handleChange} placeholder="Confirme su contraseña" disabled={loading} required/>
+                <input type="password" id="verificaPassword" name="confirmarPassword" value={formData.confirmarPassword} onChange={handleChange} placeholder="Confirme su contraseña" disabled={loading} required/>
               </div>
               
               {error && <div className="credencialesInvalidas">{error}</div>}

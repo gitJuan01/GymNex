@@ -111,8 +111,31 @@ main {
         }
       }
 
+      #nuevaPassword{
+        height: 50px;
+        width: 90%;
+        border-radius: 10px;
+        margin-bottom: 5%;
+      }
+
+      #verificaPassword{
+        height: 50px;
+        width: 90%;
+        border-radius: 10px;
+        margin-bottom: 5%;
+      }
+
       .credencialesInvalidas{
         color: rgb(255, 54, 54);
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        font-size: 30px;
+        font-weight: bold;
+      }
+
+      .mensajeExito{
+        color: rgb(60, 255, 0);
         display: flex;
         justify-content: center;
         margin-top: 5%;
