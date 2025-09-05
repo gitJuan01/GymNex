@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImage from './img/Nex.png';
-import { Link } from 'react-router-dom';
 
-function App() {
+function Login() { 
   const [formData, setFormData] = useState({ dni: '', password: '', rememberMe: false });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -33,7 +34,8 @@ function App() {
         localStorage.setItem('userData', JSON.stringify({ dni: formData.dni, password: formData.password }));
       }
 
-      alert('¡Ingreso exitoso!');
+      localStorage.setItem('user', JSON.stringify(data.user));
+      navigate('/principal');
       console.log('Usuario autenticado:', data.user);
 
     } catch (err) {
@@ -45,7 +47,6 @@ function App() {
 
   return (
     <>
-      <header></header>
       <main>
         <aside>
           <div className="logoLogin">
@@ -96,4 +97,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;

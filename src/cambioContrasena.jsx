@@ -39,7 +39,6 @@ function CambioContrasena() {
     }
 
     try {
-      // Llamada real al backend (URL actualizada)
       const response = await fetch('http://localhost:3000/api/auth/cambiarPassword', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -69,7 +68,7 @@ function CambioContrasena() {
       <main>
         <aside>
           <div className="logoLogin">
-            <img src={loginImage} alt="Imagen descriptiva de login" className="logoImagen"/>
+            <img src={loginImage} className="logoImagen"/>
           </div>
           <div className="fraseLogin">
             <p>¡A entrenar con todo!</p>
