@@ -12,6 +12,7 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "pg": "^8.14.1",

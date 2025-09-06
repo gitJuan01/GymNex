@@ -15,9 +15,14 @@ return (
 
         <nav className='navBar'>
             <ul>
-                <li></li>
+                <li>Cerrar Sesión</li>
             </ul>
         </nav>
+
+        <main>
+            
+
+        </main>
 
         </header>
     </body>
