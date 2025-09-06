@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Respuesta exitosa (sin enviar la contraseña)
+    
     const user = result.rows[0];
     const { password, ...userData } = user;
     

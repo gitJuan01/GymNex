@@ -6,7 +6,7 @@ const router = express.Router();
 // GET /api/roles
 router.get('/', async (req, res) => {
   try {
-    // Asegúrate de usar "idRol" (con R mayúscula) y "rol" como están en la tabla
+    
     const result = await pool.query('SELECT "idRol", rol FROM roles ORDER BY "idRol"');
     
     if (result.rows.length === 0) {

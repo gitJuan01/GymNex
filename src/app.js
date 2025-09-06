@@ -1,7 +1,7 @@
 // app.js
 import express from 'express';
 import cors from 'cors';
-import usuariosRouter from './routes/usuarios.js'; // Nueva importación
+import usuariosRouter from './routes/usuarios.js'; 
 import rolesRouter from './routes/roles.js';
 import dbStatusRouter from './routes/dbStatus.js';
 import authRouter from './routes/auth.js';
@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configuración limpia de rutas
+
 app.use('/api/usuarios', usuariosRouter);
 app.use('/api/roles', rolesRouter);
 app.use('/api/auth', authRouter);
