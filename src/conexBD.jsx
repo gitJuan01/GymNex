@@ -1,4 +1,3 @@
-// Ejemplo en React (por ejemplo, en Home.jsx)
 import { useEffect, useState } from 'react';
 
 function DBStatus() {

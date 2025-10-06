@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import loginImage from './img/Nex.png';
 
@@ -7,6 +7,14 @@ function Login() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Se carga el DNI que se haya guardado
+  useEffect(() => {
+    const savedDni = localStorage.getItem('rememberedDni');
+    if (savedDni) {
+      setFormData(prev => ({ ...prev, dni: savedDni, rememberMe: true }));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -30,11 +38,14 @@ function Login() {
 
       if (!response.ok) throw new Error(data.error || 'Error en la autenticación');
 
+      // SE guarda o se borra el DNI según el checkbox
       if (formData.rememberMe) {
-        localStorage.setItem('userData', JSON.stringify({ dni: formData.dni, password: formData.password }));
+        localStorage.setItem('rememberedDni', formData.dni);
+      } else {
+        localStorage.removeItem('rememberedDni');
       }
 
-      localStorage.setItem('user', JSON.stringify(data.user));
+      sessionStorage.setItem('user', JSON.stringify(data.user));
       navigate('/principal');
       console.log('Usuario autenticado:', data.user);
 
@@ -63,27 +74,22 @@ function Login() {
           </div>
           <div className='form'>
             <form onSubmit={handleSubmit}>
-              
               <div className="inputs">
                 <label htmlFor="dni">DNI:</label>
                 <input type="number" id="dni" name="dni" value={formData.dni} onChange={handleChange} placeholder="Ingrese su DNI" disabled={loading}/>
               </div>
-            
               <div className="inputs">
                 <label htmlFor="password">Contraseña:</label>
                 <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Ingrese su contraseña" disabled={loading}/>
               </div>
-              
               <div className="recordar">
                 <input type="checkbox" id="rememberMe" name="rememberMe" checked={formData.rememberMe} onChange={handleChange} disabled={loading}/>
                 <label htmlFor="rememberMe">Recordar</label>
               </div>
-              
               <div className='cambioContraseña'>
                 <Link to="/cambio-contrasena">¿Olvidaste tu contraseña?</Link>
               </div>
               {error && <div className="credencialesInvalidas">{error}</div>}
-
               <div className='botonIngresarCentrar'>
                 <button type="submit" className="botonIngresar" disabled={loading}>
                   {loading ? 'CARGANDO...' : 'INICIAR'}

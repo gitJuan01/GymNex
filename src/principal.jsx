@@ -1,33 +1,54 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useAuth } from './hooks/useAuth';
 
-function Principal(){
+function Principal() {
+  const { logout, getUser } = useAuth();
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const userData = getUser();
+    if (!userData) {
+      logout();
+    } else {
+      setUser(userData);
+    }
+  }, [logout, getUser]);
 
-return (
+  if (!user) {
+    return <div style={{ padding: '20px', textAlign: 'center' }}>Verificando autenticación...</div>;
+  }
+
+  return (
     <>
-    <body>
-        <header>
-            <div className='headerCentrado'>
-            <h1>Gym Nex</h1>
-            <h2>acá puedo poner el logo</h2>
+      <header>
+        <div className='headerCentrado'>
+          <h1>Gym Nex</h1>
+          <h2>Bienvenido, {user.nombre || 'Usuario'}</h2>
         </div>
 
         <nav className='navBar'>
-            <ul>
-                <li>Cerrar Sesión</li>
-            </ul>
+          <ul>
+            <li>
+              <a href="/" onClick={(e) => { e.preventDefault(); logout(); }} className="logout-link">
+                Cerrar Sesión
+              </a>
+            </li>
+          </ul>
         </nav>
 
         <main>
-            
-
+          <div className="dashboard">
+            <h3>Panel de Control</h3>
+            <div className="user-card">
+              <p><strong>Nombre:</strong> {user.nombre} {user.apellido}</p>
+              <p><strong>DNI:</strong> {user.dni}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+            </div>
+          </div>
         </main>
-
-        </header>
-    </body>
+      </header>
     </>
-)
+  );
 }
 
 export default Principal;

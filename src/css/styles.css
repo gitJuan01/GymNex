@@ -33,97 +33,133 @@ main {
       display: flex;
       justify-content: center;
       color: #ffffff;
-      font-size: 60px;
+      font-size: clamp(36px, 7vw, 60px);
       -webkit-text-stroke-color: black;
-      -webkit-text-stroke-width: 1px; }
+      -webkit-text-stroke-width: 1px;
+      text-align: center;
+      padding: 0 1rem; }
     main section .titulo {
       display: flex;
       justify-content: center;
       margin-top: 10%; }
       main section .titulo h3 {
         color: #ffffff;
-        font-size: 30px; }
+        font-size: clamp(18px, 4vw, 30px);
+        text-align: center;
+        padding: 0 1rem; }
     main section .form {
       margin-top: 7%;
-      margin-left: 2%; }
+      margin-left: 2%;
+      margin-right: 2%; }
     main section .inputs label {
       display: block;
-      font-size: 20px;
+      font-size: clamp(16px, 3.5vw, 20px);
       color: #ffffff; }
-    main section .inputs #dni {
+    main section .inputs #dni, main section .inputs #password, main section .inputs #email, main section .inputs #nuevaPassword, main section .inputs #confirmarPassword {
       height: 50px;
-      width: 90%;
+      width: 100%;
       margin-bottom: 5%;
-      border-radius: 10px; }
-    main section .inputs #password {
-      height: 50px;
-      width: 90%;
       border-radius: 10px;
-      margin-bottom: 5%; }
+      box-sizing: border-box; }
     main section .recordar {
       display: flex;
       justify-content: center;
       font-weight: bold;
-      font-size: 20px;
+      font-size: clamp(14px, 3.5vw, 20px);
       color: #ffffff; }
     main section input[type="checkbox"] {
       width: 20px;
       accent-color: aqua; }
-    main section .cambioContraseña {
+    main section .cambioContraseña, main section .volverInicioSesion {
       display: flex;
       justify-content: center; }
-      main section .cambioContraseña a {
+      main section .cambioContraseña a, main section .volverInicioSesion a {
         color: #ffffff;
         font-weight: bold;
-        font-size: 20px;
-        margin-top: 5%; }
-        main section .cambioContraseña a:hover {
+        font-size: clamp(16px, 4vw, 20px);
+        margin-top: 5%;
+        text-align: center; }
+        main section .cambioContraseña a:hover, main section .volverInicioSesion a:hover {
           color: #00ecd1; }
-    main section .volverInicioSesion {
+    main section .volverInicioSesion a {
+      font-size: clamp(18px, 5vw, 30px);
+      margin-top: 10%; }
+    main section .instrucciones {
       display: flex;
       justify-content: center; }
-      main section .volverInicioSesion a {
+      main section .instrucciones p {
         color: #ffffff;
         font-weight: bold;
-        font-size: 30px;
-        margin-top: 10%; }
-        main section .volverInicioSesion a:hover {
-          color: #00ecd1; }
-    main section #nuevaPassword {
-      height: 50px;
-      width: 90%;
-      border-radius: 10px;
-      margin-bottom: 5%; }
-    main section #verificaPassword {
-      height: 50px;
-      width: 90%;
-      border-radius: 10px;
-      margin-bottom: 5%; }
+        font-size: clamp(16px, 3.5vw, 25px);
+        margin-bottom: 8%;
+        text-align: center;
+        padding: 0 1rem; }
+    main section .credencialesInvalidas, main section .mensajeExito {
+      display: flex;
+      justify-content: center;
+      margin-top: 5%;
+      font-size: clamp(16px, 4.5vw, 30px);
+      font-weight: bold;
+      text-align: center;
+      padding: 0 1rem; }
     main section .credencialesInvalidas {
-      color: #ff3636;
-      display: flex;
-      justify-content: center;
-      margin-top: 5%;
-      font-size: 30px;
-      font-weight: bold; }
+      color: #ff3636; }
     main section .mensajeExito {
-      color: #3cff00;
-      display: flex;
-      justify-content: center;
-      margin-top: 5%;
-      font-size: 30px;
-      font-weight: bold; }
+      color: #3cff00; }
     main section .botonIngresarCentrar {
       display: flex;
       justify-content: center;
       margin-top: 5%; }
     main section .botonIngresar {
       background-color: aqua;
-      height: 75px;
-      width: 50%;
+      height: clamp(50px, 10vw, 75px);
+      width: 100%;
+      max-width: 400px;
       border-radius: 35px;
-      font-size: 30px;
+      font-size: clamp(16px, 4vw, 30px);
       font-weight: bold; }
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr; }
+  aside {
+    display: none; }
+  section {
+    width: 100%;
+    padding: 1.5rem; }
+    section h1 {
+      font-size: 40px;
+      margin-top: 1rem; }
+    section .titulo {
+      margin-top: 2rem; }
+      section .titulo h3 {
+        font-size: 22px; }
+    section .form {
+      margin-top: 2rem; }
+    section .inputs label {
+      font-size: 18px; }
+    section .recordar {
+      margin: 1rem 0; }
+    section .cambioContraseña, section .volverInicioSesion {
+      margin-top: 1.5rem; }
+      section .cambioContraseña a, section .volverInicioSesion a {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+        transition: color 0.3s ease; }
+        section .cambioContraseña a:hover, section .cambioContraseña a:focus, section .cambioContraseña a:active, section .volverInicioSesion a:hover, section .volverInicioSesion a:focus, section .volverInicioSesion a:active {
+          color: #00ecd1; }
+    section .volverInicioSesion a {
+      font-size: 22px;
+      margin-top: 2rem; }
+    section .botonIngresarCentrar {
+      margin-top: 2rem;
+      margin-bottom: 1.5rem; }
+    section .botonIngresar {
+      width: 100%;
+      font-size: 20px;
+      height: 55px; } }
 
 html, body {
   margin: 0;
@@ -139,8 +175,7 @@ html, body {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: baseline;
-  margin-top: 1%; }
+  align-items: baseline; }
 
 .navBar {
   background-color: aqua;

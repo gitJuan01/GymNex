@@ -1,4 +1,5 @@
-// app.js
+import 'dotenv/config';
+
 import express from 'express';
 import cors from 'cors';
 import usuariosRouter from './routes/usuarios.js'; 
@@ -11,7 +12,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 app.use('/api/usuarios', usuariosRouter);
 app.use('/api/roles', rolesRouter);
 app.use('/api/auth', authRouter);
@@ -19,4 +19,8 @@ app.use('/api/db-status', dbStatusRouter);
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en http://localhost:3000');
+  console.log('Variables de entorno cargadas:', {
+    host: process.env.SMTP_HOST,
+    user: process.env.SMTP_USER
+  });
 });
