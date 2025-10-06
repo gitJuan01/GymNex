@@ -1,6 +1,17 @@
 .navBar{
     background-color: aqua;
     margin-top: 1%;
+    padding: 10px;
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
+    
+    ul{
+        li{
+            flex-wrap: nowrap;
+            display: inline;
+            margin-right: 2%;
+            list-style: none;
+        }
+    }
 }

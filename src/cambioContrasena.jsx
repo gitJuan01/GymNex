@@ -120,8 +120,8 @@ function CambioContrasena() {
   return (
     <>
       <header></header>
-      <main>
-        <aside>
+      <main className='mainSeparado'>
+        <aside className='logoAside'>
           <div className="logoLogin">
             <img src={loginImage} className="logoImagen" alt="Logo GymNex"/>
           </div>

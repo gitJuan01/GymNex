@@ -1,9 +1,9 @@
-main {
+.mainSeparado{
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  aside { 
+  .logoAside { 
     background-color: #9f9f9f; 
     padding: 1rem; 
     

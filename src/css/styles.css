@@ -4,20 +4,20 @@
   padding: 0%;
   box-sizing: border-box; }
 
-main {
+.mainSeparado {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr; }
-  main aside {
+  .mainSeparado .logoAside {
     background-color: #9f9f9f;
     padding: 1rem; }
-    main aside .logoLogin {
+    .mainSeparado .logoAside .logoLogin {
       display: flex;
       justify-content: center; }
-      main aside .logoLogin .logoImagen {
+      .mainSeparado .logoAside .logoLogin .logoImagen {
         margin-top: 5%;
         height: 550px; }
-    main aside .fraseLogin {
+    .mainSeparado .logoAside .fraseLogin {
       display: flex;
       justify-content: center;
       margin-top: 8%;
@@ -26,10 +26,10 @@ main {
       font-weight: bold;
       -webkit-text-stroke-color: black;
       -webkit-text-stroke-width: 2px; }
-  main section {
+  .mainSeparado section {
     background-color: #4b4b4b;
     padding: 1rem; }
-    main section h1 {
+    .mainSeparado section h1 {
       display: flex;
       justify-content: center;
       color: #ffffff;
@@ -38,63 +38,63 @@ main {
       -webkit-text-stroke-width: 1px;
       text-align: center;
       padding: 0 1rem; }
-    main section .titulo {
+    .mainSeparado section .titulo {
       display: flex;
       justify-content: center;
       margin-top: 10%; }
-      main section .titulo h3 {
+      .mainSeparado section .titulo h3 {
         color: #ffffff;
         font-size: clamp(18px, 4vw, 30px);
         text-align: center;
         padding: 0 1rem; }
-    main section .form {
+    .mainSeparado section .form {
       margin-top: 7%;
       margin-left: 2%;
       margin-right: 2%; }
-    main section .inputs label {
+    .mainSeparado section .inputs label {
       display: block;
       font-size: clamp(16px, 3.5vw, 20px);
       color: #ffffff; }
-    main section .inputs #dni, main section .inputs #password, main section .inputs #email, main section .inputs #nuevaPassword, main section .inputs #confirmarPassword {
+    .mainSeparado section .inputs #dni, .mainSeparado section .inputs #password, .mainSeparado section .inputs #email, .mainSeparado section .inputs #nuevaPassword, .mainSeparado section .inputs #confirmarPassword {
       height: 50px;
       width: 100%;
       margin-bottom: 5%;
       border-radius: 10px;
       box-sizing: border-box; }
-    main section .recordar {
+    .mainSeparado section .recordar {
       display: flex;
       justify-content: center;
       font-weight: bold;
       font-size: clamp(14px, 3.5vw, 20px);
       color: #ffffff; }
-    main section input[type="checkbox"] {
+    .mainSeparado section input[type="checkbox"] {
       width: 20px;
       accent-color: aqua; }
-    main section .cambioContraseña, main section .volverInicioSesion {
+    .mainSeparado section .cambioContraseña, .mainSeparado section .volverInicioSesion {
       display: flex;
       justify-content: center; }
-      main section .cambioContraseña a, main section .volverInicioSesion a {
+      .mainSeparado section .cambioContraseña a, .mainSeparado section .volverInicioSesion a {
         color: #ffffff;
         font-weight: bold;
         font-size: clamp(16px, 4vw, 20px);
         margin-top: 5%;
         text-align: center; }
-        main section .cambioContraseña a:hover, main section .volverInicioSesion a:hover {
+        .mainSeparado section .cambioContraseña a:hover, .mainSeparado section .volverInicioSesion a:hover {
           color: #00ecd1; }
-    main section .volverInicioSesion a {
+    .mainSeparado section .volverInicioSesion a {
       font-size: clamp(18px, 5vw, 30px);
       margin-top: 10%; }
-    main section .instrucciones {
+    .mainSeparado section .instrucciones {
       display: flex;
       justify-content: center; }
-      main section .instrucciones p {
+      .mainSeparado section .instrucciones p {
         color: #ffffff;
         font-weight: bold;
         font-size: clamp(16px, 3.5vw, 25px);
         margin-bottom: 8%;
         text-align: center;
         padding: 0 1rem; }
-    main section .credencialesInvalidas, main section .mensajeExito {
+    .mainSeparado section .credencialesInvalidas, .mainSeparado section .mensajeExito {
       display: flex;
       justify-content: center;
       margin-top: 5%;
@@ -102,15 +102,15 @@ main {
       font-weight: bold;
       text-align: center;
       padding: 0 1rem; }
-    main section .credencialesInvalidas {
+    .mainSeparado section .credencialesInvalidas {
       color: #ff3636; }
-    main section .mensajeExito {
+    .mainSeparado section .mensajeExito {
       color: #3cff00; }
-    main section .botonIngresarCentrar {
+    .mainSeparado section .botonIngresarCentrar {
       display: flex;
       justify-content: center;
       margin-top: 5%; }
-    main section .botonIngresar {
+    .mainSeparado section .botonIngresar {
       background-color: aqua;
       height: clamp(50px, 10vw, 75px);
       width: 100%;
@@ -176,9 +176,35 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: baseline; }
+  .headerCentrado h1 {
+    margin-right: 2%;
+    margin-top: 1%; }
 
 .navBar {
   background-color: aqua;
   margin-top: 1%;
+  padding: 10px;
   font-size: 20px;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: center; }
+  .navBar ul li {
+    flex-wrap: nowrap;
+    display: inline;
+    margin-right: 2%;
+    list-style: none; }
+
+header {
+  background-color: #e9e9e9; }
+  header h1 {
+    font-size: 40px; }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background-color: #e9e9e9; }
+
+.busquedaUsuarios {
+  background-color: greenyellow;
+  display: flex;
+  justify-content: center;
+  padding: 1% 1%; }

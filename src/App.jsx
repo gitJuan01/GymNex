@@ -58,8 +58,8 @@ function Login() {
 
   return (
     <>
-      <main>
-        <aside>
+      <main className='mainSeparado'>
+        <aside className='logoAside'>
           <div className="logoLogin">
             <img src={loginImage} alt="Imagen descriptiva de login" className="logoImagen"/>
           </div>

@@ -23,30 +23,24 @@ function Principal() {
       <header>
         <div className='headerCentrado'>
           <h1>Gym Nex</h1>
-          <h2>Bienvenido, {user.nombre || 'Usuario'}</h2>
+          <h2>¡Bienvenido {user.nombre || 'Usuario'}!</h2>
         </div>
 
         <nav className='navBar'>
           <ul>
-            <li>
-              <a href="/" onClick={(e) => { e.preventDefault(); logout(); }} className="logout-link">
-                Cerrar Sesión
-              </a>
-            </li>
+            <li><a href="/" onClick={(e) => { e.preventDefault(); logout(); }} className="logout-link">Cerrar Sesión</a></li>
+            <li>Nuevo usuario</li>
           </ul>
         </nav>
-
-        <main>
-          <div className="dashboard">
-            <h3>Panel de Control</h3>
-            <div className="user-card">
-              <p><strong>Nombre:</strong> {user.nombre} {user.apellido}</p>
-              <p><strong>DNI:</strong> {user.dni}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-            </div>
-          </div>
-        </main>
       </header>
+
+        <main className=''>
+          <aside className='busquedaUsuarios'>
+              <h3>Búsqueda de usuario</h3>
+              <input type="text" />
+          </aside>
+          
+        </main>
     </>
   );
 }
