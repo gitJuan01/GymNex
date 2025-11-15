@@ -59,54 +59,77 @@
       }
     }
   }
+  
+  .item-usuario-seleccionado {
+  background-color: #c2e7ff !important;
+  border-left: 4px solid #0077cc;
+}
 
-.contenidoPrincipal {
+.contenidoRutinas {
   padding: 2rem;
   h2{
     text-decoration: underline;
   }
-}
-
-.avisoDatos{
-  margin-top: 2%;
-  text-decoration: underline;
-  color: rgb(0, 0, 0);
-}
-
-.formUsuario{
-  display: flex;
-  flex-direction: column;
-  margin-top: 2%;
-  .inputsDatos{
-    height: 30px;
-    width: 250px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    box-sizing: border-box;
-  }
-  .labelRadio{
-    margin-bottom: 17px;
-  }
-  .grupoRadio{
-    margin-bottom: 17px;
-    label{
-      margin-right: 20px;
-    }
-  }
-  .grupoCheckbox{
-    margin-bottom: 20px;
-    label{
-      margin-right: 20px;
+  .centradoTexto{
+    display: flex;
+    button{
+        margin-left: 20px;
+        background-color: greenyellow;
     }
   }
 }
 
-.botonCargaUsuario{
-  margin-top: 20px;
-  border-radius: 6px;
-  background-color: greenyellow;
+.formRutina{
+    margin-top: 20px;
+    font-weight: bold;
+    .ejerciciosRutina {
+      display: flex;
+      margin-top: 20px;
+      gap: 40px; 
+
+      .bloqueRutina {
+        display: flex;
+        flex-direction: column;
+
+       label {
+         font-weight: bold;
+         margin-bottom: 5px; 
+       }
+
+        textarea {
+          height: 200px;
+          width: 250px;
+        }
+      }
+}
+
+    .botonesRutina{
+        background-color: greenyellow;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: bold ;
+        width: 150px;
+        height: 40px;
+        margin-top: 20px;
+        margin-right: 20px;
+}
+
+.botonActualizar{
+  background-color: aqua;
   font-size: 15px;
+  border-radius: 6px;
   font-weight: bold ;
-  width: 200px;
+  width: 150px;
   height: 40px;
+  margin-right: 20px;
 }
+.botonEliminar{
+  background-color: rgb(255, 53, 53);
+  font-size: 15px;
+  border-radius: 6px;
+  font-weight: bold ;
+  width: 150px;
+  height: 40px
+}
+}
+

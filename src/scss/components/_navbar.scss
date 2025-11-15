@@ -1,17 +1,28 @@
 .navBar{
-    background-color: aqua;
-    margin-top: 1%;
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    
-    ul{
-        li{
-            flex-wrap: nowrap;
-            display: inline;
-            margin-right: 2%;
-            list-style: none;
-        }
+ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+      &:hover{
+            color: aqua;
     }
+
+      li a {
+        color: #f0f0f0;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        }
 }
+
+      .logout-link {
+        color: #ff4d4d;
+        font-weight: bold;
+
+        &:hover {
+          color: #ff8080;
+        }
+      }
+    }

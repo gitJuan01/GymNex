@@ -46,8 +46,12 @@ function Login() {
       }
 
       sessionStorage.setItem('user', JSON.stringify(data.user));
-      navigate('/principal');
-      console.log('Usuario autenticado:', data.user);
+      // ✅ Redirección según el rol
+      if (data.user.idrol === 2) {
+        navigate('/principalClientes');
+      } else {
+        navigate('/principal');
+      }
 
     } catch (err) {
       setError(err.message);
@@ -61,7 +65,7 @@ function Login() {
       <main className='mainSeparado'>
         <aside className='logoAside'>
           <div className="logoLogin">
-            <img src={loginImage} alt="Imagen descriptiva de login" className="logoImagen"/>
+            <img src={loginImage} className="logoImagen"/>
           </div>
           <div className="fraseLogin">
             <p>¡A entrenar con todo!</p>

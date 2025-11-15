@@ -3,6 +3,8 @@ import Login from './App';
 import CambioContrasena from './cambioContrasena';
 import Principal from './principal';
 import ProtectedRoute from './ProtectedRoute';
+import Rutinas from './rutinas';
+import Clientes from './principalClientes';
 
 function AppRoutes() {
   return (
@@ -12,6 +14,16 @@ function AppRoutes() {
       <Route path="/principal" element={
         <ProtectedRoute>
           <Principal />
+        </ProtectedRoute>
+      } />
+      <Route path="/rutinas" element={
+        <ProtectedRoute>
+          <Rutinas />
+        </ProtectedRoute>
+      } />
+      <Route path="/principalClientes" element={
+        <ProtectedRoute>
+          <Clientes />
         </ProtectedRoute>
       } />
     </Routes>
