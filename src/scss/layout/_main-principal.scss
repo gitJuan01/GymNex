@@ -102,11 +102,31 @@
 }
 
 .botonCargaUsuario{
-  margin-top: 20px;
   border-radius: 6px;
   background-color: greenyellow;
   font-size: 15px;
-  font-weight: bold ;
-  width: 200px;
+  font-weight: bold;
+  width: 150px;
   height: 40px;
+  margin-right: 20px;
+}
+
+.botonActualizarUsuario{
+  margin-top: 20px;
+  margin-right: 20px;
+  border-radius: 6px;
+  background-color: aqua;
+  font-size: 15px;
+  font-weight: bold ;
+  width: 150px;
+  height: 40px
+}
+
+.botonEliminarUsuario{
+  border-radius: 6px;
+  background-color: rgb(255, 53, 53);
+  font-size: 15px;
+  font-weight: bold ;
+  width: 150px;
+  height: 40px
 }

@@ -277,12 +277,30 @@ html, body {
       margin-right: 20px; }
 
 .botonCargaUsuario {
-  margin-top: 20px;
   border-radius: 6px;
   background-color: greenyellow;
   font-size: 15px;
   font-weight: bold;
-  width: 200px;
+  width: 150px;
+  height: 40px;
+  margin-right: 20px; }
+
+.botonActualizarUsuario {
+  margin-top: 20px;
+  margin-right: 20px;
+  border-radius: 6px;
+  background-color: aqua;
+  font-size: 15px;
+  font-weight: bold;
+  width: 150px;
+  height: 40px; }
+
+.botonEliminarUsuario {
+  border-radius: 6px;
+  background-color: #ff3535;
+  font-size: 15px;
+  font-weight: bold;
+  width: 150px;
   height: 40px; }
 
 .headerPrincipal {

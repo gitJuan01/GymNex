@@ -26,7 +26,6 @@ function Principal() {
     disciplinas: []
   });
 
-  // Mapeo disciplinas → ID
   const disciplinasMap = {
     futbol: 1,
     musculacion: 2,
@@ -35,9 +34,35 @@ function Principal() {
 
   useEffect(() => {
     const userData = getUser();
-    if (!userData) logout();
-    else setUser(userData);
+if (!userData) {
+  logout();
+} else {
+  // Convertimos el ID del rol a texto
+  const rolesTexto = {
+    1: "profesor",
+    2: "cliente",
+    3: "administrador",
+  };
+
+  const userNormalizado = {
+    ...userData,
+    rol: rolesTexto[userData.id_rol] || userData.rol
+  };
+
+  setUser(userNormalizado);
+}
+
   }, [logout, getUser]);
+
+  useEffect(() => {
+  if (user && user.rol === "profesor") {
+    setFormData(prev => ({
+      ...prev,
+      rol: "cliente"   // obligatoriamente cliente
+    }));
+  }
+}, [user]);
+
 
   const handleSearch = async (e) => {
     const value = e.target.value;
@@ -63,7 +88,7 @@ function Principal() {
         setResults([]);
         setError('No se encuentra un usuario con esos datos');
       } else {
-        setResults(data); // Guardamos objetos completos
+        setResults(data);
         setError('');
       }
 
@@ -79,10 +104,21 @@ function Principal() {
       nombre: u.nombre || '',
       apellido: u.apellido || '',
       dni: u.dni || '',
-      fecha_de_nacimiento: u.fecha_de_nacimiento || '',
+      fecha_de_nacimiento: u.fecha_de_nacimiento
+        ? u.fecha_de_nacimiento.split('T')[0]
+        : '',
       email: u.email || '',
-      rol: u.rol || '',
-      disciplinas: u.disciplinas ? u.disciplinas.map(d => d.nombre) : []
+
+      rol: u.rol ? u.rol.trim().toLowerCase() : '',
+
+      disciplinas: u.disciplinas
+        ? u.disciplinas.map(d => {
+            if (d.id === 1) return 'futbol';
+            if (d.id === 2) return 'musculacion';
+            if (d.id === 3) return 'spinningPilates';
+            return null;
+          }).filter(Boolean)
+        : []
     });
 
     setMessage('');
@@ -104,6 +140,9 @@ function Principal() {
     }));
   };
 
+  // --------------------------------------------
+  //  CREAR USUARIO
+  // --------------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -159,6 +198,101 @@ function Principal() {
     }
   };
 
+  // --------------------------------------------
+  //  ACTUALIZAR USUARIO
+  // --------------------------------------------
+  const handleActualizarUsuario = async () => {
+    if (!selectedUser) return;
+
+    setLoading(true);
+    setMessage('');
+    setError('');
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/usuarios/${selectedUser.idUsuario}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          disciplinasIds: formData.disciplinas.map(d => disciplinasMap[d])
+        })
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || 'Error al actualizar usuario');
+        setLoading(false);
+        return;
+      }
+
+      setMessage('✅ Usuario actualizado correctamente');
+
+      // Mantener usuario seleccionado actualizado
+      setSelectedUser(prev => ({
+        ...prev,
+        ...formData,
+        disciplinas: formData.disciplinas
+      }));
+
+    } catch (err) {
+      setError('Error interno al actualizar usuario');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEliminarUsuario = async () => {
+  if (!selectedUser) return;
+
+  const confirmar = window.confirm(
+    `¿Seguro que deseas eliminar a ${selectedUser.nombre} ${selectedUser.apellido}?`
+  );
+
+  if (!confirmar) return;
+
+  setLoading(true);
+  setMessage('');
+  setError('');
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/usuarios/${selectedUser.idUsuario}`, {
+      method: 'DELETE'
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      setError(data.error || 'Error al eliminar usuario');
+      setLoading(false);
+      return;
+    }
+
+    setMessage('🗑 Usuario eliminado correctamente');
+
+    // Limpia todo
+    setSelectedUser(null);
+    setResults([]);
+    setSearch('');
+
+    setFormData({
+      nombre: '',
+      apellido: '',
+      dni: '',
+      fecha_de_nacimiento: '',
+      email: '',
+      rol: '',
+      disciplinas: []
+    });
+
+  } catch (err) {
+    setError('Error interno al eliminar usuario');
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   if (!user)
     return <div style={{ padding: '20px', textAlign: 'center' }}>Verificando autenticación...</div>;
 
@@ -184,8 +318,6 @@ function Principal() {
       </header>
 
       <main className='mainPrincipal'>
-
-        {/* BUSCADOR */}
         <aside className='busquedaUsuarios'>
           <div className="busqueda-container">
             <h3>Búsqueda de usuario</h3>
@@ -208,7 +340,6 @@ function Principal() {
           </div>
         </aside>
 
-        {/* FORMULARIO */}
         <section className="contenidoPrincipal">
           <h2>Datos del usuario</h2>
 
@@ -239,19 +370,50 @@ function Principal() {
 
             <label className="labelRadio"><b>Rol</b></label>
             <div className="grupoRadio">
-              <label>
-                <input type="radio" name="rol" value="cliente"
-                  checked={formData.rol === 'cliente'} onChange={handleInputChange} /> Cliente
-              </label>
-              <label>
-                <input type="radio" name="rol" value="profesor"
-                  checked={formData.rol === 'profesor'} onChange={handleInputChange} /> Profesor
-              </label>
-              <label>
-                <input type="radio" name="rol" value="administrador"
-                  checked={formData.rol === 'administrador'} onChange={handleInputChange} /> Administrador
-              </label>
-            </div>
+
+  {/* CLIENTE → siempre visible */}
+  <label>
+    <input
+      type="radio"
+      name="rol"
+      value="cliente"
+      checked={formData.rol === "cliente"}
+      onChange={handleInputChange}
+    />
+    Cliente
+  </label>
+
+  {/* PROFESOR → visible si el logueado NO es profesor */}
+  {user?.rol !== "profesor" && (
+    <label>
+      <input
+        type="radio"
+        name="rol"
+        value="profesor"
+        checked={formData.rol === "profesor"}
+        onChange={handleInputChange}
+      />
+      Profesor
+    </label>
+  )}
+
+  {/* ADMINISTRADOR → visible SOLO si el logueado es administrador */}
+  {user?.rol === "administrador" && (
+    <label>
+      <input
+        type="radio"
+        name="rol"
+        value="administrador"
+        checked={formData.rol === "administrador"}
+        onChange={handleInputChange}
+      />
+      Administrador
+    </label>
+  )}
+
+</div>
+
+
 
             {(formData.rol === 'cliente' || formData.rol === 'profesor') && (
               <>
@@ -272,10 +434,43 @@ function Principal() {
               </>
             )}
 
-            <button type="submit" className='botonCargaUsuario' disabled={loading}>
-              {loading ? 'CARGANDO...' : 'CARGAR USUARIO'}
-            </button>
-
+            <div className="botones-usuario">
+                      
+              {/* CARGAR USUARIO — Siempre visible */}
+              <button
+                type="submit"
+                className="botonCargaUsuario"
+                disabled={loading}
+              >
+                {loading ? 'Cargando...' : 'Cargar usuario'}
+              </button>
+                      
+              {/* ACTUALIZAR — Solo visible si hay usuario seleccionado */}
+              {selectedUser && (
+                <button
+                  type="button"
+                  className="botonActualizarUsuario"
+                  onClick={handleActualizarUsuario}
+                  disabled={loading}
+                >
+                  {loading ? 'Actualizando...' : 'Actualizar usuario'}
+                </button>
+              )}
+            
+              {/* ELIMINAR — Solo visible si hay usuario seleccionado */}
+              {selectedUser && (
+                <button
+                  type="button"
+                  className="botonEliminarUsuario"
+                  onClick={handleEliminarUsuario}
+                  disabled={loading}
+                >
+                  {loading ? 'Eliminando...' : 'Eliminar usuario'}
+                </button>
+              )}
+            
+            </div>
+            
           </form>
         </section>
       </main>

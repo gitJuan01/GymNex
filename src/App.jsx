@@ -47,7 +47,7 @@ function Login() {
 
       sessionStorage.setItem('user', JSON.stringify(data.user));
       // ✅ Redirección según el rol
-      if (data.user.idrol === 2) {
+      if (data.user.id_rol === 2) {
         navigate('/principalClientes');
       } else {
         navigate('/principal');
