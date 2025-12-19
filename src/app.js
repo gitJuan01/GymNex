@@ -1,7 +1,7 @@
 import 'dotenv/config';
-
 import express from 'express';
 import cors from 'cors';
+
 import usuariosRouter from './routes/usuarios.js'; 
 import rolesRouter from './routes/roles.js';
 import dbStatusRouter from './routes/dbStatus.js';
@@ -20,12 +20,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/db-status', dbStatusRouter);
 app.use('/api/busqueda', busquedaRouter);
 app.use('/api/rutinas', rutinasRouter);
-
+/* app.use('/api/disciplinas', disciplinasRouter); // 👈 NUEVO */
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en http://localhost:3000');
-  console.log('Variables de entorno cargadas:', {
-    host: process.env.SMTP_HOST,
-    user: process.env.SMTP_USER
-  });
 });

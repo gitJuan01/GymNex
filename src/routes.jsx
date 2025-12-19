@@ -10,22 +10,37 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+
       <Route path="/cambio-contrasena" element={<CambioContrasena />} />
-      <Route path="/principal" element={
-        <ProtectedRoute>
-          <Principal />
-        </ProtectedRoute>
-      } />
-      <Route path="/rutinas" element={
-        <ProtectedRoute>
-          <Rutinas />
-        </ProtectedRoute>
-      } />
-      <Route path="/principalClientes" element={
-        <ProtectedRoute>
-          <Clientes />
-        </ProtectedRoute>
-      } />
+
+      {/* Profesores y Administradores */}
+      <Route
+        path="/principal"
+        element={
+          <ProtectedRoute allowedRoles={['profesor', 'administrador']}>
+            <Principal />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/rutinas"
+        element={
+          <ProtectedRoute allowedRoles={['profesor', 'administrador']}>
+            <Rutinas />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Solo Clientes */}
+      <Route
+        path="/principalClientes"
+        element={
+          <ProtectedRoute allowedRoles={['cliente']}>
+            <Clientes />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }
