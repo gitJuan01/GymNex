@@ -15,16 +15,15 @@ function ProtectedRoute({ children, allowedRoles }) {
     return <Navigate to="/" replace />;
   }
 
-  // 🔐 Mapeo de roles según tu BD
+  // ✅ Mapeo CORRECTO según tu BD
   const roleMap = {
-    1: 'administrador',
+    1: 'profesor',
     2: 'cliente',
-    3: 'profesor'
+    3: 'administrador',
   };
 
-  const userRole = roleMap[user.id_rol];
+  const userRole = user.rol || roleMap[user.id_rol];
 
-  // 🚫 Si el rol no está permitido → afuera
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     return <Navigate to="/" replace />;
   }

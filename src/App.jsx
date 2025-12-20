@@ -3,7 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import loginImage from './img/Nex.png';
 
 function Login() { 
-  const [formData, setFormData] = useState({ dni: '', password: '', rememberMe: false });
+  const [formData, setFormData] = useState({
+    dni: '',
+    password: '',
+    rememberMe: false
+  });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +22,10 @@ function Login() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
+    });
     if (error) setError(null);
   };
 
@@ -31,23 +38,43 @@ function Login() {
       const response = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dni: formData.dni, contraseña: formData.password })
+        body: JSON.stringify({
+          dni: formData.dni,
+          contraseña: formData.password
+        })
       });
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.error || 'Error en la autenticación');
+      if (!response.ok) {
+        throw new Error(data.error || 'Error en la autenticación');
+      }
 
-      // SE guarda o se borra el DNI según el checkbox
+      // Guardar / borrar DNI recordado
       if (formData.rememberMe) {
         localStorage.setItem('rememberedDni', formData.dni);
       } else {
         localStorage.removeItem('rememberedDni');
       }
 
-      sessionStorage.setItem('user', JSON.stringify(data.user));
-      // ✅ Redirección según el rol
-      if (data.user.id_rol === 2) {
+      // 🔹 NORMALIZACIÓN DEL ROL (OPCIÓN A)
+      const rolMap = {
+        1: 'profesor',
+        2: 'cliente',
+        3: 'administrador'
+      };
+
+
+      const userNormalizado = {
+        ...data.user,
+        rol: rolMap[data.user.id_rol]
+      };
+
+      // Guardamos el usuario normalizado
+      sessionStorage.setItem('user', JSON.stringify(userNormalizado));
+
+      // 🔀 Redirección según rol
+      if (userNormalizado.rol === 'cliente') {
         navigate('/principalClientes');
       } else {
         navigate('/principal');
@@ -62,40 +89,81 @@ function Login() {
 
   return (
     <>
-      <main className='mainSeparado'>
-        <aside className='logoAside'>
+      <main className="mainSeparado">
+        <aside className="logoAside">
           <div className="logoLogin">
-            <img src={loginImage} className="logoImagen"/>
+            <img src={loginImage} className="logoImagen" alt="Gym Nex" />
           </div>
           <div className="fraseLogin">
             <p>¡A entrenar con todo!</p>
           </div>
         </aside>
+
         <section>
           <h1>¡Bienvenido!</h1>
-          <div className='titulo'>
+
+          <div className="titulo">
             <h3>Ingrese sus datos</h3>
           </div>
-          <div className='form'>
+
+          <div className="form">
             <form onSubmit={handleSubmit}>
               <div className="inputs">
                 <label htmlFor="dni">DNI:</label>
-                <input type="number" id="dni" name="dni" value={formData.dni} onChange={handleChange} placeholder="Ingrese su DNI" disabled={loading}/>
+                <input
+                  type="number"
+                  id="dni"
+                  name="dni"
+                  value={formData.dni}
+                  onChange={handleChange}
+                  placeholder="Ingrese su DNI"
+                  disabled={loading}
+                />
               </div>
+
               <div className="inputs">
                 <label htmlFor="password">Contraseña:</label>
-                <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Ingrese su contraseña" disabled={loading}/>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Ingrese su contraseña"
+                  disabled={loading}
+                />
               </div>
+
               <div className="recordar">
-                <input type="checkbox" id="rememberMe" name="rememberMe" checked={formData.rememberMe} onChange={handleChange} disabled={loading}/>
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  name="rememberMe"
+                  checked={formData.rememberMe}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
                 <label htmlFor="rememberMe">Recordar</label>
               </div>
-              <div className='cambioContraseña'>
-                <Link to="/cambio-contrasena">¿Olvidaste tu contraseña?</Link>
+
+              <div className="cambioContraseña">
+                <Link to="/cambio-contrasena">
+                  ¿Olvidaste tu contraseña?
+                </Link>
               </div>
-              {error && <div className="credencialesInvalidas">{error}</div>}
-              <div className='botonIngresarCentrar'>
-                <button type="submit" className="botonIngresar" disabled={loading}>
+
+              {error && (
+                <div className="credencialesInvalidas">
+                  {error}
+                </div>
+              )}
+
+              <div className="botonIngresarCentrar">
+                <button
+                  type="submit"
+                  className="botonIngresar"
+                  disabled={loading}
+                >
                   {loading ? 'CARGANDO...' : 'INICIAR'}
                 </button>
               </div>

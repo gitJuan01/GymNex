@@ -8,6 +8,8 @@ import dbStatusRouter from './routes/dbStatus.js';
 import authRouter from './routes/auth.js';
 import busquedaRouter from './routes/busqueda.js';
 import rutinasRouter from './routes/rutinas.js';
+import metricasRoutes from './routes/metricas.js';
+import clienteEstadoRouter from './routes/clienteEstado.js';
 
 const app = express();
 
@@ -20,7 +22,9 @@ app.use('/api/auth', authRouter);
 app.use('/api/db-status', dbStatusRouter);
 app.use('/api/busqueda', busquedaRouter);
 app.use('/api/rutinas', rutinasRouter);
-/* app.use('/api/disciplinas', disciplinasRouter); // 👈 NUEVO */
+app.use('/api/metricas', metricasRoutes);
+app.use('/api/cliente-estado', clienteEstadoRouter);
+
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en http://localhost:3000');

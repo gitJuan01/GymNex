@@ -5,7 +5,7 @@ import { sendPasswordResetEmail } from './emailServices.js';
 
 const router = express.Router();
 
-router.post('/login', async (req, res) => { //se validan las credenciales
+router.post('/login', async (req, res) => {
   const { dni, contraseña } = req.body;
 
   try {
@@ -17,24 +17,44 @@ router.post('/login', async (req, res) => { //se validan las credenciales
       return res.status(400).json({ error: 'El DNI debe tener exactamente 8 números' });
     }
 
-    const result = await pool.query(
-      'SELECT * FROM usuarios WHERE dni = $1 AND contraseña = $2',
-      [dni, contraseña]
+    // 1️⃣ Buscar usuario SOLO por DNI
+    const userResult = await pool.query(
+      `SELECT * FROM usuarios WHERE dni = $1`,
+      [dni]
     );
 
-    if (result.rows.length === 0) {
-      return res.status(401).json({ error: 'Por favor, verifique los datos ingresados' });
+    // ❌ DNI inexistente
+    if (userResult.rows.length === 0) {
+      return res.status(401).json({ error: 'DNI o contraseña incorrectos' });
     }
 
-    const user = result.rows[0];
-    const { password, ...userData } = user;
+    const user = userResult.rows[0];
+
+    // 2️⃣ Contraseña incorrecta
+    if (user.contraseña !== contraseña) {
+      return res.status(401).json({ error: 'DNI o contraseña incorrectos' });
+    }
+
+    // 3️⃣ Usuario deshabilitado
+    if (!user.activo) {
+      return res.status(403).json({
+        error: 'El usuario se encuentra deshabilitado. Contacte al administrador.'
+      });
+    }
+
+    // 4️⃣ Login OK
+    const { contraseña: _, ...userData } = user;
 
     res.json({ success: true, user: userData });
+
   } catch (error) {
     console.error('Error en login:', error);
-    res.status(500).json({ error: 'Error interno del servidor. Intente nuevamente más tarde.' });
+    res.status(500).json({
+      error: 'Error interno del servidor. Intente nuevamente más tarde.'
+    });
   }
 });
+
 
 // Solicitud de recuperacion de contraseña
 router.post('/solicitarRecuperacion', async (req, res) => {

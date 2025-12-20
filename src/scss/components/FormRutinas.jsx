@@ -177,7 +177,7 @@ function FormRutinas({ selectedUser }) {
         <form className="formRutina" onSubmit={handleSubmit}>
 
           {/* DISCIPLINA */}
-          <label><b>Disciplina</b></label>
+          <label><b>Disciplina *</b></label>
           <select className='selectDisciplinas' value={disciplinaSeleccionada} onChange={e => setDisciplinaSeleccionada(e.target.value)} required>
   <option value="">-- Seleccione disciplina --</option>
 
@@ -192,7 +192,7 @@ function FormRutinas({ selectedUser }) {
 </select>
 
 
-          <label className="nombreRutina">Nombre de la rutina</label>
+          <label className="nombreRutina">Nombre de la rutina *</label>
           <input
             type="text"
             value={titulo}

@@ -5,6 +5,7 @@ import Principal from './principal';
 import ProtectedRoute from './ProtectedRoute';
 import Rutinas from './rutinas';
 import Clientes from './principalClientes';
+import Informes from './informes';
 
 function AppRoutes() {
   return (
@@ -13,7 +14,7 @@ function AppRoutes() {
 
       <Route path="/cambio-contrasena" element={<CambioContrasena />} />
 
-      {/* Profesores y Administradores */}
+      {/* Profesores y Administradores - Panel de gestión */}
       <Route
         path="/principal"
         element={
@@ -32,15 +33,24 @@ function AppRoutes() {
         }
       />
 
-      {/* Solo Clientes */}
+      {/* Clientes Y Profesores - Ver sus propias rutinas */}
       <Route
         path="/principalClientes"
         element={
-          <ProtectedRoute allowedRoles={['cliente']}>
+          <ProtectedRoute allowedRoles={['cliente', 'profesor']}>
             <Clientes />
           </ProtectedRoute>
         }
       />
+
+      {/* Solo Administradores - Métricas */}
+      <Route
+        path="/informes"
+        element={
+          <ProtectedRoute allowedRoles={['administrador']}>
+            <Informes />
+          </ProtectedRoute>
+        }/>
     </Routes>
   );
 }
